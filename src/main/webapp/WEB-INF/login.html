@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>登录</title>
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../bootstrap/css/core.css" rel="stylesheet" type="text/css">
+    <script src="../bootstrap/js/jquery-3.2.1.min.js"></script>
+    <script src="../bootstrap/js/jquery.validate.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.js"></script>
+    <script src="../bootstrap/js/npm.js"></script>
+    <style type="text/css">
+        .el-login-form{
+            width:600px;
+            margin-left:auto;
+            margin-right:auto;
+            margin-top: 20px;
+        }
+        .el-login-form .form-control{
+            width: 220px;
+            display: inline;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function(){
+            $("#loginForm").validate({
+                errorClass:"text-danger",
+                highlight:function(input){
+                    $(input).closest(".form-group").addClass("has-error");
+                },
+                unhighlight:function(input){
+                    $(input).closest(".form-group").removeClass("has-error");
+                },
+                submitHandler:function(form){
+                    $(form).ajaxSubmit(function(data){
+                        if(data.success()){
+                            $.message.confirm("提示","登录成功，点击确定，跳转到个人中心", function () {
+                                window.location.href="/personal.do";
+                            });
+                        }else{
+                            $.message.alert("提示",data.msg);
+                        }
+                    });
+                },
+                rules:{
+                    username:"required",password:"required"
+                }
+            });
+        });
+
+    </script>
+</head>
+<body style="overflow-x: hidden;">
+<div class="el-head">
+    <div class="container" style="position: relative">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/">首页</a> </li>
+            <li><a href="login.html">登录</a> </li>
+            <li><a href="#">帮助</a> </li>
+        </ul>
+    </div>
+</div>
+
+<div class="nav navbar-nav navbar-right">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="#"><img src="../../resources/static/image/1f29f9e2915779bbf8a826eb2d377252.jpg">
+            <span class="el-page-title">用户登录</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <form class="form-horizontal el-login-form" id="loginForm"  action="/login.do" method="post">
+        <p class="h4" style="margin: 10px 10px 20px 110px ;color: #999; ">请输入用户名密码</p>
+        <div class="form-group">
+            <label class="control-label col-sm-2" > 用户名 </label>
+            <div class="col-sm-10">
+                <input type="text" autocomplete="off" class="form-control"  >
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">密码</label>
+            <div class="col-sm-10">
+                <input type="password" autocomplete="off" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-3">
+                <button class="btn btn-success" style="width: 100px">登录</button>
+                &emsp;&emsp;
+                <a href="regedit.html">没有账号，注册</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container-foot-2">
+    <div class="context">
+        <div class="left">
+            <p>深圳</p>
+            <p>福田</p>
+            <p>电话：</p>
+            <a href="http://www.miitbeian.gov.cn" style="color: #ffffff">IC备案：xxxxxxx</a>
+        </div>
+        <div class="right">
+            <a target="_blank" href="https://baidu.com">
+                <img src="../../resources/static/image/e1d6519f7bc7b1fda390c29b2a93ab98.jpg">
+            </a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+</body>
+</html>
